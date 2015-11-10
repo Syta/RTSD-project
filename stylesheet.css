@@ -1,0 +1,40 @@
+div {
+	width:63px;
+	height:91px;
+	position: fixed;
+	top: 15%;
+	left: 15%;
+}
+
+.backImage {
+    width:63px;
+	height:91px;
+	position: absolute;
+	top: 15%;
+	left: 15%;
+}
+
+.frontImage {
+    width:63px;
+	height:91px;
+	position: relative;
+	top: 15%;
+	left: 15%;
+}
+
+#backImage {
+    width:63px;
+	height:91px;
+	position: fixed;
+	top: 15%;
+	left: 15%;
+}
+
+.joku {
+    width:150px;
+	height:91px;
+	position: relative;
+	top: 5%;
+	left: 1%;
+}
+

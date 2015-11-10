@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Cards</title>
+        <link rel='stylesheet' type='text/css' href='stylesheet.css'/>
+		<script type='text/javascript' src='jquery-1.11.2.min.js'></script>
+		<script type='text/javascript' src='jquery-ui.min.js'></script>
+		<script type='text/javascript' src='jquery.ui.touch-punch.min.js'></script>
+        <script type='text/javascript' src='script2.js'></script>
+	</head>
+	<body>
+		<div class="joku">
+			<button id="shuffle" type="button">Shuffle</button>
+			<button id="reset" type="button">Reset</button>
+			<p>First you have to simply click the first card to get the deck to work. (will be fixed)</p>
+			<p>Double click to turn a card.</p>
+			<p>Clicking a card will bring it on top of the other cards.</p>
+		</div>
+		<div id="cards">
+			<div class="ui-widget-content dragga">
+				<img src="resized/2_of_diamonds.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			<div class="ui-widget-content dragga">
+				<img src="resized/2_of_clubs.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			<div class="ui-widget-content dragga">
+				<img src="resized/2_of_hearts.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			<div class="ui-widget-content dragga">
+				<img src="resized/2_of_spades.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			
+			<div class="ui-widget-content dragga">
+				<img src="resized/3_of_diamonds.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			<div class="ui-widget-content dragga">
+				<img src="resized/3_of_clubs.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			<div class="ui-widget-content dragga">
+				<img src="resized/3_of_hearts.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			<div class="ui-widget-content dragga">
+				<img src="resized/3_of_spades.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			
+			<div class="ui-widget-content dragga">
+				<img src="resized/4_of_diamonds.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			<div class="ui-widget-content dragga">
+				<img src="resized/4_of_clubs.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			<div class="ui-widget-content dragga">
+				<img src="resized/4_of_hearts.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			<div class="ui-widget-content dragga">
+				<img src="resized/4_of_spades.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			
+			<div class="ui-widget-content dragga">
+				<img src="resized/5_of_diamonds.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			<div class="ui-widget-content dragga">
+				<img src="resized/5_of_clubs.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			<div class="ui-widget-content dragga">
+				<img src="resized/5_of_hearts.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			<div class="ui-widget-content dragga">
+				<img src="resized/5_of_spades.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			
+			<div class="ui-widget-content dragga">
+				<img src="resized/6_of_diamonds.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			<div class="ui-widget-content dragga">
+				<img src="resized/6_of_clubs.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			<div class="ui-widget-content dragga">
+				<img src="resized/6_of_hearts.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			<div class="ui-widget-content dragga">
+				<img src="resized/6_of_spades.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			
+			<div class="ui-widget-content dragga">
+				<img src="resized/7_of_diamonds.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			<div class="ui-widget-content dragga">
+				<img src="resized/7_of_clubs.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			<div class="ui-widget-content dragga">
+				<img src="resized/7_of_hearts.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			<div class="ui-widget-content dragga">
+				<img src="resized/7_of_spades.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			
+			<div class="ui-widget-content dragga">
+				<img src="resized/8_of_diamonds.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			<div class="ui-widget-content dragga">
+				<img src="resized/8_of_clubs.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			<div class="ui-widget-content dragga">
+				<img src="resized/8_of_hearts.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			<div class="ui-widget-content dragga">
+				<img src="resized/8_of_spades.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			
+			<div class="ui-widget-content dragga">
+				<img src="resized/9_of_diamonds.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			<div class="ui-widget-content dragga">
+				<img src="resized/9_of_clubs.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			<div class="ui-widget-content dragga">
+				<img src="resized/9_of_hearts.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			<div class="ui-widget-content dragga">
+				<img src="resized/9_of_spades.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			
+			<div class="ui-widget-content dragga">
+				<img src="resized/10_of_diamonds.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			<div class="ui-widget-content dragga">
+				<img src="resized/10_of_clubs.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			<div class="ui-widget-content dragga">
+				<img src="resized/10_of_hearts.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			<div class="ui-widget-content dragga">
+				<img src="resized/10_of_spades.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			
+			<div class="ui-widget-content dragga">
+				<img src="resized/ace_of_diamonds.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			<div class="ui-widget-content dragga">
+				<img src="resized/ace_of_clubs.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			<div class="ui-widget-content dragga">
+				<img src="resized/ace_of_hearts.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			<div class="ui-widget-content dragga">
+				<img src="resized/ace_of_spades.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			
+			<div class="ui-widget-content dragga">
+				<img src="resized/jack_of_diamonds.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			<div class="ui-widget-content dragga">
+				<img src="resized/jack_of_clubs.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			<div class="ui-widget-content dragga">
+				<img src="resized/jack_of_hearts.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			<div class="ui-widget-content dragga">
+				<img src="resized/jack_of_spades.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			
+			<div class="ui-widget-content dragga">
+				<img src="resized/queen_of_diamonds.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			<div class="ui-widget-content dragga">
+				<img src="resized/queen_of_clubs.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			<div class="ui-widget-content dragga">
+				<img src="resized/queen_of_hearts.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			<div class="ui-widget-content dragga">
+				<img src="resized/queen_of_spades.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			
+			<div class="ui-widget-content dragga">
+				<img src="resized/king_of_diamonds.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			<div class="ui-widget-content dragga">
+				<img src="resized/king_of_clubs.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			<div class="ui-widget-content dragga">
+				<img src="resized/king_of_hearts.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+			<div class="ui-widget-content dragga">
+				<img src="resized/king_of_spades.png" class="frontImage"></img>
+				<img src="resized/back.png" class="backImage"></img>
+			</div>
+		</div>
+	</body>
+</html>

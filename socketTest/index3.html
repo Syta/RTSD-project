@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Cards</title>
+<script type='text/javascript' src='http://syta.kapsi.fi/cards/jquery-1.11.2.min.js'></script>
+		<script type='text/javascript' src='http://syta.kapsi.fi/cards/jquery-ui.min.js'></script>
+    <style>
+      div {
+	width:63px;
+	height:91px;
+	position: fixed;
+	top: 15%;
+	left: 15%;
+}
+
+.backImage {
+    width:63px;
+	height:91px;
+	position: absolute;
+	top: 15%;
+	left: 15%;
+}
+
+.frontImage {
+    width:63px;
+	height:91px;
+	position: relative;
+	top: 15%;
+	left: 15%;
+}
+
+#backImage {
+    width:63px;
+	height:91px;
+	position: fixed;
+	top: 15%;
+	left: 15%;
+}
+
+.joku {
+    width:63px;
+	height:91px;
+	position: relative;
+	top: 5%;
+	left: 5%;
+}
+    </style>
+  </head>
+  <body>
+   <div id="mydiv" class="ui-widget-content dragga">
+	<img src="http://syta.kapsi.fi/cards/resized/king_of_spades.png" class="frontImage"></img>
+	<img src="http://syta.kapsi.fi/cards/resized/back.png" class="backImage"></img>
+   </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+$(document).ready(function(){
+  var socket = io();
+
+  $( ".dragga", this).dblclick(
+  function() {
+    socket.emit('doubleClick');
+  });
+
+  socket.on('doubleClickAll', function () {
+      $(".backImage").toggle();
+  });
+  
+  $( ".dragga", this).click(
+  function() {
+	$(this).appendTo('#cards')
+	socket.emit('dragging');
+  });
+  
+  $(".dragga").draggable({
+	  cursor: 'pointer',
+	  drag: function(event, ui){
+		var coord = $(this).position();
+		socket.emit('receive_position', {
+		x: coord.left,
+		y: coord.top
+		}); 
+	  }
+  });
+
+  socket.on('update_position', function (data) {
+	var x = data.x;
+	var y = data.y;
+	$("#mydiv").css({
+		left: x + "px",
+		top: y + "px"
+	});
+  });
+  
+  $( "button").click(
+	function () {
+		var parent = $("#cards");
+		var divs = parent.children();
+		while (divs.length) {
+			parent.append(divs.splice(Math.floor(Math.random() * divs.length), 1)[0]);
+		}
+	});
+});
+    </script>
+  </body>
+</html>
