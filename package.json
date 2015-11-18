@@ -1,0 +1,25 @@
+{
+  "name": "rtsdproject",
+  "version": "0.0.1",
+  "description": "",
+  "main": "socketTest/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Syta/RTSD-project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Syta/RTSD-project/issues"
+  },
+  "homepage": "https://github.com/Syta/RTSD-project#readme",
+  "dependencies": {
+    "bower": "^1.6.5",
+    "express": "^4.13.3",
+    "forever": "^0.15.1",
+    "socket.io": "^1.3.7"
+  }
+}

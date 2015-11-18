@@ -1,0 +1,28 @@
+---
+- name: install nodejs (1/2)
+  shell: "curl -sL https://deb.nodesource.com/setup_5.x | bash -"
+
+- name: install nodejs (2/2)
+  apt:
+    name: nodejs
+    state: present
+    update_cache: yes
+
+- name: npm install
+  shell: "cd /vagrant/ && npm install --no-bin-links"
+
+- name: install global npm packages
+  npm:
+    name: "{{ item }}"
+    global: yes
+  with_items:
+   - bower
+   - forever
+
+- name: bower install
+  sudo: no
+  bower: path=/vagrant/
+
+- name: start forever-service
+  shell: "forever start /vagrant/socketTest/index.js"
+

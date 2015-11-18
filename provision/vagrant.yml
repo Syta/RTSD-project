@@ -1,0 +1,9 @@
+---
+- name: Install nodejs server
+  hosts: all
+  #remote_user: root
+  sudo: yes
+
+  roles:
+    - common
+    - nodejs
