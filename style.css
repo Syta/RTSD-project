@@ -1,0 +1,19 @@
+.dealerCardOne {
+	width:63px;
+	height:91px;
+	position: fixed;
+	top: 15%;
+	left: 100px;
+}
+
+.dealerCardTwo {
+	width:63px;
+	height:91px;
+	position: fixed;
+	top: 15%;
+	left: 180px;
+}
+
+.card{
+	
+}
