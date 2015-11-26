@@ -59,4 +59,22 @@ $( "#playerCards").click(
 		$(".dealerCardTwo").append("<img class='card' src=resized/" + card + ".png></img>");
 		$("#playerValue").text("Player value: "+totalValueAsString);
 	});
+
+$("#determineWinner").click(
+	function() {
+		if(dealer_totalValue == 21){
+			$("#winner").append("<p>Dealer wins</p>");
+		} else if(player_totalValue == 21) {
+			$("#winner").append("<p>Player wins</p>");
+		} else if (dealer_totalValue > player_totalValue){
+			$("#winner").append("<p>Dealer wins</p>");
+		} else if (player_totalValue > 21){
+			$("#winner").append("<p>Dealer wins</p>");
+		} else if (dealer_totalValue > 21) {
+			$("#winner").append("<p>Player wins</p>");
+		} else {
+			$("#winner").append("<p>Player wins</p>");
+		}
+	});
+
 });
