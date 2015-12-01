@@ -1,5 +1,5 @@
 .dealerCardOne {
-	width:63px;
+	width:300px;
 	height:91px;
 	position: fixed;
 	top: 15%;
@@ -7,6 +7,22 @@
 }
 
 .dealerCardTwo {
+	width:63px;
+	height:91px;
+	position: fixed;
+	top: 15%;
+	left: 180px;
+}
+
+.playerCardOne {
+	width:300px;
+	height:91px;
+	position: fixed;
+	top: 35%;
+	left: 100px;
+}
+
+.playerCardTwo {
 	width:63px;
 	height:91px;
 	position: fixed;
