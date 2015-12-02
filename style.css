@@ -6,14 +6,6 @@
 	left: 100px;
 }
 
-.dealerCardTwo {
-	width:63px;
-	height:91px;
-	position: fixed;
-	top: 15%;
-	left: 180px;
-}
-
 .playerCardOne {
 	width:300px;
 	height:91px;
@@ -22,14 +14,10 @@
 	left: 100px;
 }
 
-.playerCardTwo {
-	width:63px;
-	height:91px;
-	position: fixed;
-	top: 15%;
-	left: 180px;
-}
-
 .card{
 	
+}
+
+.playerButtons{
+
 }
