@@ -8,17 +8,18 @@
     state: present
     update_cache: yes
 
-- name: npm install
-  shell: "cd /vagrant/ && npm install --no-bin-links"
+#- name: Install packages based on package.json.
+#  npm: path=/vagrant global=yes
+#  sudo: yes
 
-- name: install global npm packages
+- name: install npm packages
   npm:
     name: "{{ item }}"
     global: yes
   with_items:
-   - bower
-   - forever
+    - pm2
+    - bower
+    - express
+    - socket.io
 
-- name: start forever-service
-  shell: "forever start /vagrant/socketTest/index.js"
 
