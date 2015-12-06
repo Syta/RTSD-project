@@ -40,7 +40,7 @@ $( "#hit").click(
 		valueAsInt = parseInt(values[number]);
 		player_totalValue += valueAsInt;
 		totalValueAsString = player_totalValue.toString();
-		$(".playerCardOne").append("<img class='card' src=cards/" + card + ".png></img>");
+		$(".playerCardOne").append("<img class='card' src='cards/resized/" + card + ".png'></img>");
 		$("#playerValue").text("Player value: "+totalValueAsString);
 	});
 
@@ -65,7 +65,7 @@ $("#stand").click(
 		valueAsInt = parseInt(values[number]);
 		dealer_totalValue += valueAsInt;
 		totalValueAsString = dealer_totalValue.toString();
-		$(".dealerCardOne").append("<img class='card' src=resized/" + card + ".png></img>");
+		$(".dealerCardOne").append("<img class='card' src='cards/resized/" + card + ".png'></img>");
 		$("#dealerValue").text("Dealer value: "+totalValueAsString);
 		$("#backCard").hide();
 	});
@@ -78,9 +78,9 @@ function dealerStartCards (){
 	valueAsInt = parseInt(values[number]);
 	dealer_totalValue += valueAsInt;
 	totalValueAsString = dealer_totalValue.toString();
-	$(".dealerCardOne").append("<img class='card' src=resized/" + card + ".png></img>");
+	$(".dealerCardOne").append("<img class='card' src=cards/resized/" + card + ".png></img>");
 	$("#dealerValue").text("Dealer value: "+totalValueAsString);
-	$(".dealerCardOne").append("<img class='card' id='backCard' src=resized/back.png></img>");
+	$(".dealerCardOne").append("<img class='card' id='backCard' src='cards/resized/back.png'></img>");
 }
 
 function playerStartCards (){
@@ -89,13 +89,13 @@ function playerStartCards (){
 	valueAsInt = parseInt(values[number]);
 	player_totalValue += valueAsInt;
 	totalValueAsString = player_totalValue.toString();
-	$(".playerCardOne").append("<img class='card' src=resized/" + card + ".png></img>");
+	$(".playerCardOne").append("<img class='card' src='cards/resized/" + card + ".png'></img>");
 	$("#playerValue").text("Player value: "+totalValueAsString);
 	number = 0 + Math.floor(Math.random() * 52);
 	card = cards[number];
 	valueAsInt = parseInt(values[number]);
 	player_totalValue += valueAsInt;
 	totalValueAsString = player_totalValue.toString();
-	$(".playerCardOne").append("<img class='card' src=resized/" + card + ".png></img>");
+	$(".playerCardOne").append("<img class='card' src='cards/resized/" + card + ".png'></img>");
 	$("#playerValue").text("Player value: "+totalValueAsString);
 }

@@ -19,10 +19,6 @@
    - bower
    - forever
 
-#- name: bower install
-#  sudo: no
-#  bower: path=/vagrant/
-
 - name: start forever-service
   shell: "forever start /vagrant/socketTest/index.js"
 

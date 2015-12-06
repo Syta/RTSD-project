@@ -1,0 +1,25 @@
+{
+  "name": "rtsdproject",
+  "description": "",
+  "main": "socketTest/index.js",
+  "authors": [
+    "Juhani Karppinen",
+    "Teemu Arkkukangas"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/Syta/RTSD-project",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "jquery-ui": "~1.11.4",
+    "socket.io-client": "~1.3.7"
+  }
+}
