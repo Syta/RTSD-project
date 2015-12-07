@@ -23,30 +23,32 @@ var totalValueAsString;
 var number;
 
 $(document).ready(function(){
-  
+  var socket = io.connect("192.168.99.11:3000");
 
   dealerStartCards();
   playerStartCards();
 
-  $.getScript("bower_components/socket.io-client/index.js", function (){
-	console.log("jbgkjasfhdbgkbkjb");
-	var socket = io();
-	});
-
-$( "#hit").click(
+  $( "#hit").click(
 	function () {
-		number = 0 + Math.floor(Math.random() * 52);
+		socket.emit('hit');
+  });
+  socket.on('hitAll', function () {
+      number = 0 + Math.floor(Math.random() * 52);
 		card = cards[number];
 		valueAsInt = parseInt(values[number]);
 		player_totalValue += valueAsInt;
 		totalValueAsString = player_totalValue.toString();
 		$(".playerCardOne").append("<img class='card' src='cards/resized/" + card + ".png'></img>");
 		$("#playerValue").text("Player value: "+totalValueAsString);
-	});
+  });
 
-$("#stand").click(
+  $("#stand").click(
 	function() {
-		if(dealer_totalValue == 21){
+		socket.emit('stand');
+  });
+
+  socket.on('standAll', function () {
+      if(dealer_totalValue == 21){
 			$("#winner").append("<p>Dealer wins</p>");
 		} else if(player_totalValue == 21) {
 			$("#winner").append("<p>Player wins</p>");
@@ -68,7 +70,7 @@ $("#stand").click(
 		$(".dealerCardOne").append("<img class='card' src='cards/resized/" + card + ".png'></img>");
 		$("#dealerValue").text("Dealer value: "+totalValueAsString);
 		$("#backCard").hide();
-	});
+  });
 
 });
 
@@ -99,3 +101,4 @@ function playerStartCards (){
 	$(".playerCardOne").append("<img class='card' src='cards/resized/" + card + ".png'></img>");
 	$("#playerValue").text("Player value: "+totalValueAsString);
 }
+

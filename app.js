@@ -16,14 +16,13 @@ io.on('connection', function(socket){
 	socket.on('disconnect', function(){
 		console.log('user has disconnected');
 	});
-	socket.on('doubleClick', function(){
-		socket.broadcast.emit('doubleClickAll');
-		socket.emit('doubleClickAll');
+	socket.on('hit', function(){
+		socket.broadcast.emit('hitAll');
+		socket.emit('hitAll');
 	});
-	socket.emit('update_position', lastPosition);
-	socket.on('receive_position', function(data){
-		lastPosition = data;
-		socket.broadcast.emit('update_position', data);
+	socket.on('stand', function(){
+		socket.broadcast.emit('standAll');
+		socket.emit('standAll');
 	});
 });
 
