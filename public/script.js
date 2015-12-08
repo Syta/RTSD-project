@@ -23,7 +23,8 @@ var totalValueAsString;
 var number;
 
 $(document).ready(function(){
-  var socket = io.connect("192.168.99.11:3000");
+  var host = window.location.hostname;
+  var socket = io.connect(host+":3000");
 
   dealerStartCards();
   playerStartCards();
