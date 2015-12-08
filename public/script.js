@@ -21,20 +21,33 @@ var player_totalValue = 0;
 var valueAsInt;
 var totalValueAsString;
 var number;
+var number1;
+var number2;
 
 $(document).ready(function(){
   var host = window.location.hostname;
   var socket = io.connect(host+":3000");
+  
+  $("#start").click(
+	function() {
+		socket.emit('start');
+  });
 
-  dealerStartCards();
-  playerStartCards();
+  socket.on('startAll', function (data) {
+	number = data.one;
+	number1 = data.two;
+	number2 = data.three;
+	dealerStartCards();
+	playerStartCards();
+  });
 
   $( "#hit").click(
 	function () {
 		socket.emit('hit');
   });
-  socket.on('hitAll', function () {
-      number = 0 + Math.floor(Math.random() * 52);
+  socket.on('hitAll', function (data) {
+      		//generateNumber();
+		number = data;
 		card = cards[number];
 		valueAsInt = parseInt(values[number]);
 		player_totalValue += valueAsInt;
@@ -43,12 +56,16 @@ $(document).ready(function(){
 		$("#playerValue").text("Player value: "+totalValueAsString);
   });
 
+  socket.on('pickCardAll', function () {
+	generateNumber();
+  });
+
   $("#stand").click(
 	function() {
 		socket.emit('stand');
   });
 
-  socket.on('standAll', function () {
+  socket.on('standAll', function (data) {
       if(dealer_totalValue == 21){
 			$("#winner").append("<p>Dealer wins</p>");
 		} else if(player_totalValue == 21) {
@@ -63,7 +80,8 @@ $(document).ready(function(){
 			$("#winner").append("<p>Player wins</p>");
 		}
 
-		number = 0 + Math.floor(Math.random() * 52);
+		//generateNumber();
+		number = data;
 		card = cards[number];
 		valueAsInt = parseInt(values[number]);
 		dealer_totalValue += valueAsInt;
@@ -75,8 +93,12 @@ $(document).ready(function(){
 
 });
 
-function dealerStartCards (){
+function generateNumber () {
 	number = 0 + Math.floor(Math.random() * 52);
+}
+
+function dealerStartCards (){
+	//generateNumber();
 	card = cards[number];
 	valueAsInt = parseInt(values[number]);
 	dealer_totalValue += valueAsInt;
@@ -87,16 +109,16 @@ function dealerStartCards (){
 }
 
 function playerStartCards (){
-	number = 0 + Math.floor(Math.random() * 52);
-	card = cards[number];
-	valueAsInt = parseInt(values[number]);
+	//generateNumber();
+	card = cards[number1];
+	valueAsInt = parseInt(values[number1]);
 	player_totalValue += valueAsInt;
 	totalValueAsString = player_totalValue.toString();
 	$(".playerCardOne").append("<img class='card' src='cards/resized/" + card + ".png'></img>");
 	$("#playerValue").text("Player value: "+totalValueAsString);
-	number = 0 + Math.floor(Math.random() * 52);
-	card = cards[number];
-	valueAsInt = parseInt(values[number]);
+	//generateNumber();
+	card = cards[number2];
+	valueAsInt = parseInt(values[number2]);
 	player_totalValue += valueAsInt;
 	totalValueAsString = player_totalValue.toString();
 	$(".playerCardOne").append("<img class='card' src='cards/resized/" + card + ".png'></img>");
