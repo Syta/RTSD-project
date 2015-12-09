@@ -28,8 +28,7 @@ $(document).ready(function(){
   var host = window.location.hostname;
   var socket = io.connect(host+":3000");
   
-  $("#start").click(
-	function() {
+  $("#start").click( function() {
 		socket.emit('start');
   });
 
@@ -41,12 +40,10 @@ $(document).ready(function(){
 	playerStartCards();
   });
 
-  $( "#hit").click(
-	function () {
+  $( "#hit").click( function () {
 		socket.emit('hit');
   });
   socket.on('hitAll', function (data) {
-      		//generateNumber();
 		number = data;
 		card = cards[number];
 		valueAsInt = parseInt(values[number]);
@@ -56,12 +53,7 @@ $(document).ready(function(){
 		$("#playerValue").text("Player value: "+totalValueAsString);
   });
 
-  socket.on('pickCardAll', function () {
-	generateNumber();
-  });
-
-  $("#stand").click(
-	function() {
+  $("#stand").click( function() {
 		socket.emit('stand');
   });
 
@@ -80,7 +72,6 @@ $(document).ready(function(){
 			$("#winner").append("<p>Player wins</p>");
 		}
 
-		//generateNumber();
 		number = data;
 		card = cards[number];
 		valueAsInt = parseInt(values[number]);
@@ -93,12 +84,7 @@ $(document).ready(function(){
 
 });
 
-function generateNumber () {
-	number = 0 + Math.floor(Math.random() * 52);
-}
-
 function dealerStartCards (){
-	//generateNumber();
 	card = cards[number];
 	valueAsInt = parseInt(values[number]);
 	dealer_totalValue += valueAsInt;
@@ -109,14 +95,12 @@ function dealerStartCards (){
 }
 
 function playerStartCards (){
-	//generateNumber();
 	card = cards[number1];
 	valueAsInt = parseInt(values[number1]);
 	player_totalValue += valueAsInt;
 	totalValueAsString = player_totalValue.toString();
 	$(".playerCardOne").append("<img class='card' src='cards/resized/" + card + ".png'></img>");
 	$("#playerValue").text("Player value: "+totalValueAsString);
-	//generateNumber();
 	card = cards[number2];
 	valueAsInt = parseInt(values[number2]);
 	player_totalValue += valueAsInt;

@@ -15,8 +15,6 @@ var number2;
 
 io.on('connection', function(socket){
 	console.log('user has connected');
-	number = 0 + Math.floor(Math.random() * 52);
-	//io.sockets.emit('userConnected', number);
 	
 	socket.on('start', function(){
 		console.log('user has disconnected');
@@ -46,8 +44,3 @@ io.on('connection', function(socket){
 http.listen(3000, function(){
 	console.log('listening on *:3000');
 });
-
-function generateNumber () {
-	var num = 0 + Math.floor(Math.random() * 52);
-	return num;
-}
