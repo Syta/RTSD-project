@@ -13,8 +13,8 @@ var cards = ["2_of_clubs","2_of_diamonds","2_of_hearts","2_of_spades",
 	"king_of_clubs","king_of_diamonds","king_of_hearts","king_of_spades"];
 var values = ["2","2","2","2","3","3","3","3","4","4","4","4","5","5","5","5",
 		"6","6","6","6","7","7","7","7","8","8","8","8","9","9","9","9",
-		"10","10","10","10","1","1","1","1","11","11","11","11",
-		"12","12","12","12","13","13","13","13"];
+		"10","10","10","10","1","1","1","1","10","10","10","10",
+		"10","10","10","10","10","10","10","10"];
 var card;
 var dealer_totalValue = 0;
 var player_totalValue = 0;
@@ -29,13 +29,16 @@ $(document).ready(function(){
   var socket = io.connect(host+":3000");
   
   $("#start").click( function() {
-		socket.emit('start');
+	socket.emit('start');
   });
 
   socket.on('startAll', function (data) {
 	number = data.one;
 	number1 = data.two;
 	number2 = data.three;
+	dealer_totalValue = 0;
+	player_totalValue = 0;
+	$("#wrap").replaceWith(divClone.clone(true));
 	dealerStartCards();
 	playerStartCards();
   });
@@ -58,7 +61,52 @@ $(document).ready(function(){
   });
 
   socket.on('standAll', function (data) {
-      if(dealer_totalValue == 21){
+		number = data.one;
+		card = cards[number];
+		valueAsInt = parseInt(values[number]);
+		dealer_totalValue += valueAsInt;
+		totalValueAsString = dealer_totalValue.toString();
+		$(".dealerCardOne").append("<img class='card' src='cards/resized/" + card + ".png'></img>");
+		$("#dealerValue").text("Dealer value: "+totalValueAsString);
+		$("#backCard").hide();
+		if(dealer_totalValue < 17){
+			number = data.two;
+			card = cards[number];
+			valueAsInt = parseInt(values[number]);
+			dealer_totalValue += valueAsInt;
+			totalValueAsString = dealer_totalValue.toString();
+			$(".dealerCardOne").append("<img class='card' src='cards/resized/" + card + ".png'></img>");
+			$("#dealerValue").text("Dealer value: "+totalValueAsString);
+		if(dealer_totalValue < 17){
+			number = data.three;
+			card = cards[number];
+			valueAsInt = parseInt(values[number]);
+			dealer_totalValue += valueAsInt;
+			totalValueAsString = dealer_totalValue.toString();
+			$(".dealerCardOne").append("<img class='card' src='cards/resized/" + card + ".png'></img>");
+			$("#dealerValue").text("Dealer value: "+totalValueAsString);
+		if(dealer_totalValue < 17){
+			number = data.four;
+			card = cards[number];
+			valueAsInt = parseInt(values[number]);
+			dealer_totalValue += valueAsInt;
+			totalValueAsString = dealer_totalValue.toString();
+			$(".dealerCardOne").append("<img class='card' src='cards/resized/" + card + ".png'></img>");
+			$("#dealerValue").text("Dealer value: "+totalValueAsString);
+		if(dealer_totalValue < 17){
+			number = data.five;
+			card = cards[number];
+			valueAsInt = parseInt(values[number]);
+			dealer_totalValue += valueAsInt;
+			totalValueAsString = dealer_totalValue.toString();
+			$(".dealerCardOne").append("<img class='card' src='cards/resized/" + card + ".png'></img>");
+			$("#dealerValue").text("Dealer value: "+totalValueAsString);
+		}
+		}
+		}
+		}
+
+	if(dealer_totalValue == 21){
 			$("#winner").append("<p>Dealer wins</p>");
 		} else if(player_totalValue == 21) {
 			$("#winner").append("<p>Player wins</p>");
@@ -71,16 +119,9 @@ $(document).ready(function(){
 		} else {
 			$("#winner").append("<p>Player wins</p>");
 		}
-
-		number = data;
-		card = cards[number];
-		valueAsInt = parseInt(values[number]);
-		dealer_totalValue += valueAsInt;
-		totalValueAsString = dealer_totalValue.toString();
-		$(".dealerCardOne").append("<img class='card' src='cards/resized/" + card + ".png'></img>");
-		$("#dealerValue").text("Dealer value: "+totalValueAsString);
-		$("#backCard").hide();
   });
+
+  var divClone = $("#wrap").clone(true);
 
 });
 
