@@ -38,6 +38,9 @@ io.on('connection', function(socket){
 		num1 = 0 + Math.floor(Math.random() * 52);
 		io.sockets.emit('hitAll', num1);
 	});
+	socket.on('bet', function(){
+		io.sockets.emit('betAll');
+	});
 	socket.on('stand', function(){
 		num1 = 0 + Math.floor(Math.random() * 52);
 		num2 = 0 + Math.floor(Math.random() * 52);
@@ -51,9 +54,6 @@ io.on('connection', function(socket){
 		num10 = 0 + Math.floor(Math.random() * 52);
 		io.sockets.emit('standAll', {one: num1, two: num2, three: num3, four: num4,
 			five: num5, six: num6, seven: num7, eight: num8, nine: num9, ten: num10});
-	});
-	socket.on('pickCard', function(){
-		socket.broadcast.emit('pickCardAll');
 	});
 
 });

@@ -18,6 +18,8 @@ var values = ["2","2","2","2","3","3","3","3","4","4","4","4","5","5","5","5",
 var card;
 var dealer_totalValue = 0;
 var player_totalValue = 0;
+var player_money = 10;
+var bet;
 var valueAsInt;
 var totalValueAsString;
 var number;
@@ -41,6 +43,21 @@ $(document).ready(function(){
 	$("#wrap").replaceWith(divClone.clone(true));
 	dealerStartCards();
 	playerStartCards();
+	$("#playerMoney").text("Money: "+player_money);
+  });
+
+  $( "#bet").click( function () {
+		socket.emit('bet');
+  });
+  socket.on('betAll', function () {
+		bet = $("#playerBet").val();
+		if(bet <= player_money){
+			player_money -= bet;
+			$("#currentBet").text("Bet: "+bet);
+			$("#playerMoney").text("Money: "+player_money);
+		}
+		else {alert("Can't afford the bet");}
+		
   });
 
   $( "#hit").click( function () {
@@ -108,16 +125,28 @@ $(document).ready(function(){
 
 	if(dealer_totalValue == 21){
 			$("#winner").append("<p>Dealer wins</p>");
+			$("#currentBet").text("Bet: ");
 		} else if(player_totalValue == 21) {
 			$("#winner").append("<p>Player wins</p>");
-		} else if (dealer_totalValue > player_totalValue){
-			$("#winner").append("<p>Dealer wins</p>");
+			$("#currentBet").text("Bet: ");
+			player_money = player_money * 2.5;
+			$("#playerMoney").text("Money: "+player_money);
 		} else if (player_totalValue > 21){
 			$("#winner").append("<p>Dealer wins</p>");
+			$("#currentBet").text("Bet: ");
 		} else if (dealer_totalValue > 21) {
 			$("#winner").append("<p>Player wins</p>");
+			$("#currentBet").text("Bet: ");
+			player_money = player_money * 1.5;
+			$("#playerMoney").text("Money: "+player_money);
+		} else if (dealer_totalValue > player_totalValue){
+			$("#winner").append("<p>Dealer wins</p>");
+			$("#currentBet").text("Bet: ");
 		} else {
 			$("#winner").append("<p>Player wins</p>");
+			$("#currentBet").text("Bet: ");
+			player_money = player_money * 1.5;
+			$("#playerMoney").text("Money: "+player_money);
 		}
   });
 
