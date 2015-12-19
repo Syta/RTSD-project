@@ -25,6 +25,7 @@ var totalValueAsString;
 var number;
 var number1;
 var number2;
+var betting_phase;
 
 $(document).ready(function(){
   var host = window.location.hostname;
@@ -44,24 +45,31 @@ $(document).ready(function(){
 	dealerStartCards();
 	playerStartCards();
 	$("#playerMoney").text("Money: "+player_money);
+	betting_phase = true;
   });
 
   $( "#bet").click( function () {
+	if(betting_phase == true){
 		socket.emit('bet');
+	}
   });
   socket.on('betAll', function () {
-		bet = $("#playerBet").val();
-		if(bet <= player_money){
-			player_money -= bet;
-			$("#currentBet").text("Bet: "+bet);
-			$("#playerMoney").text("Money: "+player_money);
-		}
-		else {alert("Can't afford the bet");}
-		
+	bet = $("#playerBet").val();
+	if(bet <= player_money){
+		player_money -= bet;
+		$("#currentBet").text("Bet: "+bet);
+		$("#playerMoney").text("Money: "+player_money);
+		betting_phase = false;
+	}
+	else {alert("Can't afford the bet");}	
   });
 
   $( "#hit").click( function () {
+	if(betting_phase == false){
 		socket.emit('hit');
+	} else {
+		alert("Waiting for bets.");	
+	}
   });
   socket.on('hitAll', function (data) {
 		number = data;
@@ -74,7 +82,11 @@ $(document).ready(function(){
   });
 
   $("#stand").click( function() {
+	if(betting_phase == false){
 		socket.emit('stand');
+	} else {
+		alert("Waiting for bets.");
+	}	
   });
 
   socket.on('standAll', function (data) {
@@ -129,7 +141,7 @@ $(document).ready(function(){
 		} else if(player_totalValue == 21) {
 			$("#winner").append("<p>Player wins</p>");
 			$("#currentBet").text("Bet: ");
-			player_money = player_money * 2.5;
+			player_money += bet * 2.5;
 			$("#playerMoney").text("Money: "+player_money);
 		} else if (player_totalValue > 21){
 			$("#winner").append("<p>Dealer wins</p>");
@@ -137,7 +149,7 @@ $(document).ready(function(){
 		} else if (dealer_totalValue > 21) {
 			$("#winner").append("<p>Player wins</p>");
 			$("#currentBet").text("Bet: ");
-			player_money = player_money * 1.5;
+			player_money += bet * 1.5;
 			$("#playerMoney").text("Money: "+player_money);
 		} else if (dealer_totalValue > player_totalValue){
 			$("#winner").append("<p>Dealer wins</p>");
@@ -145,7 +157,7 @@ $(document).ready(function(){
 		} else {
 			$("#winner").append("<p>Player wins</p>");
 			$("#currentBet").text("Bet: ");
-			player_money = player_money * 1.5;
+			player_money += bet * 1.5;
 			$("#playerMoney").text("Money: "+player_money);
 		}
   });
