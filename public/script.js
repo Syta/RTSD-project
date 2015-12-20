@@ -13,7 +13,7 @@ function dealCard(divClass, card){
         $(jQueryDiv).append( "<img class='card' " +
                 "src='cards/resized/" + card + ".png' " + 
                 "style='position: absolute; " +
-                "top: "+ String( count_of_dealed_cards * 18) + "px; " + 
+                "top: "+ String(-1 * count_of_dealed_cards * 18) + "px; " + 
                 "left: "+String(count_of_dealed_cards * 18) + "px;' />");
     }
 
