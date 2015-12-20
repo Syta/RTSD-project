@@ -2,16 +2,19 @@
     width:300px;
     height:91px;
     position: fixed;
-    top: 220px;
-    left: 100px;
+}
+
+.playersArea {
+    position: relative;
+    height: 60%;
+    bottom:0;
 }
 
 .playerCardOne {
     width:300px;
-    height:91px;
-    position: fixed;
-    top: 380px;
-    left: 100px;
+    height:20%;
+    position: absolute !important;
+    bottom: 0;
 }
 
 .card{
@@ -69,7 +72,7 @@ body{
     height: 75%;
 
 
-/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1b1b1b+0,383838+13,4e4e4e+24,0a0a0a+47,010101+50,0d0d0d+54,959595+100 */
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1b1b1b+0,383838+13,4e4e4e+24,0a0a0a+47,010101+50,0d0d0d+54,959595+100 */
 
     background: #1b1b1b; /* Old browsers */
 
@@ -93,4 +96,11 @@ body{
 .playing_state #start, 
 .playing_state .bet-group {
     display: none;
+}
+
+.circle {
+    border: 1px solid white;
+    border-radius: 50%;
+    width: 110px;
+    height: 110px; 
 }

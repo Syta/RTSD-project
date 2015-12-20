@@ -14,7 +14,7 @@ function dealCard(divClass, card){
                 "src='cards/resized/" + card + ".png' " + 
                 "style='position: absolute; " +
                 "top: "+ String(-1 * count_of_dealed_cards * 18) + "px; " + 
-                "left: "+String(count_of_dealed_cards * 18) + "px;' />");
+                "left: "+String(count_of_dealed_cards * 32) + "px;' />");
     }
 
 
