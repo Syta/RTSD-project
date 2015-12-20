@@ -1,3 +1,28 @@
+
+
+function dealCard(divClass, card){
+    var jQueryDiv = "." + divClass;
+    count_of_dealed_cards = $(jQueryDiv+" img.card").length;
+
+    if(count_of_dealed_cards == 0){
+        $(jQueryDiv).append( "<img class='card' " +
+                "src='cards/resized/" + card + ".png' " + 
+                "style='position: relative; top: 0; left: 0;' />");
+    }
+    else{
+        $(jQueryDiv).append( "<img class='card' " +
+                "src='cards/resized/" + card + ".png' " + 
+                "style='position: absolute; " +
+                "top: "+ String( count_of_dealed_cards * 18) + "px; " + 
+                "left: "+String(count_of_dealed_cards * 18) + "px;' />");
+    }
+
+
+}
+
+
+
+
 var cards = ["2_of_clubs","2_of_diamonds","2_of_hearts","2_of_spades",
 	"3_of_clubs","3_of_diamonds","3_of_hearts","3_of_spades",
 	"4_of_clubs","4_of_diamonds","4_of_hearts","4_of_spades",
@@ -79,8 +104,10 @@ $(document).ready(function(){
 		valueAsInt = parseInt(values[number]);
 		player_totalValue += valueAsInt;
 		totalValueAsString = player_totalValue.toString();
-		$(".playerCardOne").append("<img class='card' src='cards/resized/" + card + ".png'></img>");
-		$("#playerValue").text("Player value: "+totalValueAsString);
+
+        dealCard("playerCardOne", card);
+		
+        $("#playerValue").text("Player value: "+totalValueAsString);
   });
 
   $("#stand").click( function() {
@@ -190,7 +217,9 @@ function playerStartCards (){
 	valueAsInt = parseInt(values[number2]);
 	player_totalValue += valueAsInt;
 	totalValueAsString = player_totalValue.toString();
-	$(".playerCardOne").append("<img class='card' src='cards/resized/" + card + ".png'></img>");
+
+    dealCard("playerCardOne", card);
+    
 	$("#playerValue").text("Player value: "+totalValueAsString);
 }
 
