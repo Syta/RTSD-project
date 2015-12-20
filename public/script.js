@@ -51,6 +51,7 @@ var number;
 var number1;
 var number2;
 var betting_phase;
+var userID;
 
 $(document).ready(function(){
   var host = window.location.hostname;
@@ -60,6 +61,11 @@ $(document).ready(function(){
   $(".playerControlArea .playerButtons")
         .addClass("betting_state");
  
+  socket.on('getID', function (data) {
+  	userID = data;
+	//$("#userID").text("ID: "+userID);
+  });
+
   $("#start").click( function() {
 	if(betting_phase == false){	
 		socket.emit('start');
