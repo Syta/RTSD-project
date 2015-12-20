@@ -1,39 +1,43 @@
 <!doctype html>
 <html>
-  <head>
-	<link rel='stylesheet' type='text/css' href='style.css'>
-	<link rel='stylesheet' type='text/css' href='bower_components/bootstrap/dist/css/bootstrap.min.css'>
-	<script type='text/javascript' src='bower_components/jquery/dist/jquery.min.js'></script>
-	<script type='text/javascript' src='bower_components/socket.io-client/socket.io.js'></script>
-	<script type='text/javascript' src='script.js'></script>
-  </head>
-  <body>
-	<div id="wrap">
-		<div>
-			<p id="playerMoney">Money: </p>
-			<p id="currentBet">Bet: </p>
-			<p id="dealerValue"></p>
-			<p id="playerValue"></p>
-			<p id="winner"></p>
-		</div>
-		<div class="playerButtons col-lg-4">
-			<button class="btn btn-success" type="button" id="hit">Hit</button>
-			<button class="btn btn-warning" type="button" id="stand">Stand</button>
-			<button class="btn btn-primary" type="button" id="start">Start</button>
-            <form>
-                <div class="input-group col-lg-6">
-                    <input type="number" class="form-control" id="playerBet" value="0">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" id="bet">Bet</button> 
-                </span>
+    <head>
+        <link rel='stylesheet' type='text/css' href='style.css'>
+        <link rel='stylesheet' type='text/css' href='bower_components/bootstrap/dist/css/bootstrap.min.css'>
+        <script type='text/javascript' src='bower_components/jquery/dist/jquery.min.js'></script>
+        <script type='text/javascript' src='bower_components/socket.io-client/socket.io.js'></script>
+        <script type='text/javascript' src='script.js'></script>
+    </head>
+    <body>
+        <div id="wrap">
+            <div class="gameArea">
+                <div class="dealerCardOne">
                 </div>
-            </form>
-		</div>
-		<div class="dealerCardOne">
-		</div>
-		<div class="playerCardOne">
-		</div>
-	</div>
-  
-  </body>
+                <div class="playerCardOne">
+                </div>
+            </div>
+            <div class="playerControlArea col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <div class="playerStatusArea col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <p id="currentBet">Bet: </p>
+                    <p id="dealerValue"></p>
+                    <p id="playerValue"></p>
+                    <p id="winner"></p>
+                    <p id="playerMoney">Money: </p>
+                </div>
+                <div class="playerButtons col-lg-6 col-md-6 col-sm-6 col-xs-6" > 
+                    <button class="btn btn-success" type="button" id="hit">Hit</button>
+                    <button class="btn btn-warning" type="button" id="stand">Stand</button>
+                    <button class="btn btn-primary" type="button" id="start">Start</button>
+                    <form>
+                        <div class="input-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <input type="number" class="form-control" id="playerBet" value="0">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button" id="bet">Bet</button> 
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </body>
 </html>

@@ -33,8 +33,6 @@ div#wrap {
     width: 100%;
     height: 100%;
 
-
-
     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#005700+0,008a00+26,52b152+59,83c783+83,b4ddb4+100 */
 
     background: #005700; /* Old browsers */
@@ -47,12 +45,41 @@ div#wrap {
 
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#005700', endColorstr='#b4ddb4',GradientType=0 ); /* IE6-9 */
 
-
-
-
 }
 
 p {
     color: white;
+}
+
+body{
+    min-width: 640px; 
+    min-height: 480px;
+}
+
+.gameArea {
+    padding: 10px;
+    min-height: 75%;
+    height: 75%;
+
+}
+
+.playerControlArea {
+    padding: 20px;
+    min-height: 25%;
+    height: 75%;
+
+
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1b1b1b+0,383838+13,4e4e4e+24,0a0a0a+47,010101+50,0d0d0d+54,959595+100 */
+
+    background: #1b1b1b; /* Old browsers */
+
+    background: -moz-linear-gradient(top,  #1b1b1b 0%, #383838 13%, #4e4e4e 24%, #0a0a0a 47%, #010101 50%, #0d0d0d 54%, #959595 100%); /* FF3.6-15 */
+
+    background: -webkit-linear-gradient(top,  #1b1b1b 0%,#383838 13%,#4e4e4e 24%,#0a0a0a 47%,#010101 50%,#0d0d0d 54%,#959595 100%); /* Chrome10-25,Safari5.1-6 */
+
+    background: linear-gradient(to bottom,  #1b1b1b 0%,#383838 13%,#4e4e4e 24%,#0a0a0a 47%,#010101 50%,#0d0d0d 54%,#959595 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1b1b1b', endColorstr='#959595',GradientType=0 ); /* IE6-9 */
+
 }
 
