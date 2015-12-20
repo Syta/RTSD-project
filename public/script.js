@@ -30,9 +30,12 @@ var betting_phase;
 $(document).ready(function(){
   var host = window.location.hostname;
   var socket = io.connect(host+":3000");
-  
+  betting_phase = true;
+
   $("#start").click( function() {
-	socket.emit('start');
+	if(betting_phase == false){	
+		socket.emit('start');
+	}
   });
 
   socket.on('startAll', function (data) {
@@ -45,12 +48,12 @@ $(document).ready(function(){
 	dealerStartCards();
 	playerStartCards();
 	$("#playerMoney").text("Money: "+player_money);
-	betting_phase = true;
   });
 
   $( "#bet").click( function () {
 	if(betting_phase == true){
 		socket.emit('bet');
+		betting_phase = false;
 	}
   });
   socket.on('betAll', function () {
@@ -59,7 +62,6 @@ $(document).ready(function(){
 		player_money -= bet;
 		$("#currentBet").text("Bet: "+bet);
 		$("#playerMoney").text("Money: "+player_money);
-		betting_phase = false;
 	}
 	else {alert("Can't afford the bet");}	
   });
@@ -90,6 +92,7 @@ $(document).ready(function(){
   });
 
   socket.on('standAll', function (data) {
+		betting_phase = true;
 		number = data.one;
 		card = cards[number];
 		valueAsInt = parseInt(values[number]);
