@@ -83,3 +83,14 @@ body{
 
 }
 
+
+.betting_state #hit, 
+.betting_state #stand {
+    display: none;
+}
+
+
+.playing_state #start, 
+.playing_state .bet-group {
+    display: none;
+}
