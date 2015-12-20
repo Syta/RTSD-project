@@ -51,10 +51,15 @@ var num7;
 var num8;
 var num9;
 var num10;
+var clients = [];
+var user = 0;
 
 io.on('connection', function(socket){
     console.log('user has connected');
     var cardDeck = initializeDeck(deckCount);
+    clients.push(socket.id);
+    io.to(clients[user]).emit('getID', socket.id);
+    user++;
 
     socket.on('start', function(){
         cardDeck = initializeDeck(deckCount);
@@ -67,6 +72,8 @@ io.on('connection', function(socket){
 
     socket.on('disconnect', function(){
         console.log('user has disconnected');
+	clients.pop(user);
+	user--;
     });
     socket.on('hit', function(){
         num1 = 0 + cardDeck.pop();
