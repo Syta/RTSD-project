@@ -199,7 +199,7 @@ $(document).ready(function(){
 		} else if (dealer_totalValue > 21) {
 			$("#winner").append("<p>Player wins</p>");
 			$("#currentBet").text("Bet: ");
-			player_money += bet * 1.5;
+			player_money += bet * 2.0;
 			$("#playerMoney").text("Money: "+player_money);
 		} else if (dealer_totalValue > player_totalValue){
 			$("#winner").append("<p>Dealer wins</p>");
@@ -207,7 +207,7 @@ $(document).ready(function(){
 		} else {
 			$("#winner").append("<p>Player wins</p>");
 			$("#currentBet").text("Bet: ");
-			player_money += bet * 1.5;
+			player_money += bet * 2.0;
 			$("#playerMoney").text("Money: "+player_money);
 		}
   });
