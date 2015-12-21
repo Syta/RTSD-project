@@ -56,23 +56,24 @@ var number4;
 var number5;
 var number6;
 var betting_phase;
+var can_bet = true;
 var userID;
 var player_turn = 1;
 var player_turn_id;
 var player_count = 0;
-var game_end = false;
 
 $(document).ready(function(){
   var host = window.location.hostname;
   var socket = io.connect(host+":3000");
   betting_phase = true;
+  $("#playerMoney").text("Money: "+player_money);
 
   $(".playerControlArea .playerButtons")
         .addClass("betting_state");
  
   socket.on('getID', function (data) {
   	userID = data;
-	//$("#userID").text("ID: "+userID);
+	console.log("userID", userID);
   });
   
   socket.on('user_conn', function (data) {
@@ -86,6 +87,7 @@ $(document).ready(function(){
   $("#start").click( function() {
 	if(betting_phase == false){	
 		socket.emit('start');
+		socket.emit('player_turn');
 	} else {
 		alert("Waiting for bets.");
 	}
@@ -101,38 +103,45 @@ $(document).ready(function(){
 	number6 = data.seven;
 	number7 = data.eight;
 	number8 = data.nine;
+	//player_turn_id = data.turn;
 	dealer_totalValue = 0;
-	player_totalValue = 0;
+	playerOne_totalValue = 0;
+	playerTwo_totalValue = 0;
+	player_turn = 1;
 	$("#wrap").replaceWith(divClone.clone(true));
 	dealerStartCards();
 	playerStartCards();
 	$("#playerMoney").text("Money: "+player_money);
 	$("#playerTurn").text("Player turn: "+player_turn);
 
-    $(".playerControlArea .playerButtons")
-        .removeClass("betting_state")
+	$(".playerControlArea .playerButtons")
+	.removeClass("betting_state")
         .addClass("playing_state");
-  
+  });
+
+  socket.on('player_turnAll', function (data) {
+	player_turn_id = data;
+	console.log("player_turn_id", player_turn_id);
   });
 
   $( "#bet").click( function () {
-	if(betting_phase == true){
-		socket.emit('bet');
-		betting_phase = false;
-	}
+	if(betting_phase == true && can_bet == true){
+		bet = $("#playerBet").val();
+		if(bet <= player_money){
+			player_money -= bet;
+			$("#currentBet").text("Bet: "+bet);
+			$("#playerMoney").text("Money: "+player_money);
+			can_bet = false;
+			socket.emit('bet');
+		} else {alert("Can't afford the bet");}
+	}else {alert("Can't bet");}
   });
   socket.on('betAll', function () {
-	bet = $("#playerBet").val();
-	if(bet <= player_money){
-		player_money -= bet;
-		$("#currentBet").text("Bet: "+bet);
-		$("#playerMoney").text("Money: "+player_money);
-	}
-	else {alert("Can't afford the bet");}	
+	betting_phase = false;
   });
 
   $( "#hit").click( function () {
-	if(betting_phase == false){
+	if(betting_phase == false && player_turn_id == userID){
 		socket.emit('hit');
 	} else {
 		alert("Waiting for bets.");	
@@ -159,8 +168,9 @@ $(document).ready(function(){
   });
 
   $("#stand").click( function() {
-	if(betting_phase == false){
+	if(betting_phase == false && player_turn_id == userID){
 		socket.emit('stand');
+		socket.emit("player_turn");
 	} else {
 		alert("Waiting for bets.");
 	}	
@@ -168,6 +178,7 @@ $(document).ready(function(){
 
   socket.on('standAll', function (data) {
 	if(player_turn == player_count){
+	can_bet = true;
         betting_phase = true;
         number = data.one;
         card = cards[number];
@@ -178,7 +189,7 @@ $(document).ready(function(){
         $("#dealerValue").text("Dealer value: "+totalValueAsString);
         $("#backCard").hide();
    
-    $(".playerControlArea .playerButtons")
+        $(".playerControlArea .playerButtons")
         .removeClass("playing_state")
         .addClass("watching_state");
 
