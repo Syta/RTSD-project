@@ -119,7 +119,7 @@ $(document).ready(function(){
 		player_totalValue += valueAsInt;
 		totalValueAsString = player_totalValue.toString();
 
-        dealCard("playerCardOne", card);
+        dealCard("playerOne", card);
 		
         $("#playerValue").text("Player value: "+totalValueAsString);
   });
@@ -237,14 +237,14 @@ function playerStartCards (){
 	valueAsInt = parseInt(values[number1]);
 	player_totalValue += valueAsInt;
 	totalValueAsString = player_totalValue.toString();
-	$(".playerCardOne").append("<img class='card' src='cards/resized/" + card + ".png'></img>");
+	$(".playerOne").append("<img class='card' src='cards/resized/" + card + ".png'></img>");
 	$("#playerValue").text("Player value: "+totalValueAsString);
 	card = cards[number2];
 	valueAsInt = parseInt(values[number2]);
 	player_totalValue += valueAsInt;
 	totalValueAsString = player_totalValue.toString();
 
-    dealCard("playerCardOne", card);
+    dealCard("playerOne", card);
     
 	$("#playerValue").text("Player value: "+totalValueAsString);
 }
