@@ -186,7 +186,7 @@ $(document).ready(function(){
         dealer_totalValue += valueAsInt;
         totalValueAsString = dealer_totalValue.toString();
         $(".dealerCardOne").append("<img class='card' src='cards/resized/" + card + ".png'></img>");
-        $("#dealerValue").text("Dealer value: "+totalValueAsString);
+        $("#dealerValue").text(totalValueAsString);
         $("#backCard").hide();
    
         $(".playerControlArea .playerButtons")
@@ -200,7 +200,7 @@ $(document).ready(function(){
           dealer_totalValue += valueAsInt;
           totalValueAsString = dealer_totalValue.toString();
           $(".dealerCardOne").append("<img class='card' src='cards/resized/" + card + ".png'></img>");
-          $("#dealerValue").text("Dealer value: "+totalValueAsString);
+          $("#dealerValue").text(totalValueAsString);
           if(dealer_totalValue < 17){
               number = data.three;
               card = cards[number];
@@ -208,7 +208,7 @@ $(document).ready(function(){
               dealer_totalValue += valueAsInt;
               totalValueAsString = dealer_totalValue.toString();
               $(".dealerCardOne").append("<img class='card' src='cards/resized/" + card + ".png'></img>");
-              $("#dealerValue").text("Dealer value: "+totalValueAsString);
+              $("#dealerValue").text(totalValueAsString);
               if(dealer_totalValue < 17){
                   number = data.four;
                   card = cards[number];
@@ -216,7 +216,7 @@ $(document).ready(function(){
                   dealer_totalValue += valueAsInt;
                   totalValueAsString = dealer_totalValue.toString();
                   $(".dealerCardOne").append("<img class='card' src='cards/resized/" + card + ".png'></img>");
-                  $("#dealerValue").text("Dealer value: "+totalValueAsString);
+                  $("#dealerValue").text(totalValueAsString);
                   if(dealer_totalValue < 17){
                       number = data.five;
                       card = cards[number];
@@ -224,7 +224,7 @@ $(document).ready(function(){
                       dealer_totalValue += valueAsInt;
                       totalValueAsString = dealer_totalValue.toString();
                       $(".dealerCardOne").append("<img class='card' src='cards/resized/" + card + ".png'></img>");
-                      $("#dealerValue").text("Dealer value: "+totalValueAsString);
+                      $("#dealerValue").text(totalValueAsString);
                   }
               }
           }
