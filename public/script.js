@@ -146,7 +146,7 @@ $(document).ready(function(){
 		playerOne_totalValue += valueAsInt;
 		totalValueAsString = playerOne_totalValue.toString();
         	dealCard("playerOne", card);
-        	$("#playerOneValue").text("Player one value: "+totalValueAsString);
+        	$("#playerOneValue").text(totalValueAsString);
 	} else if (player_turn == 2){
 		number = data;
 		card = cards[number];
@@ -154,7 +154,7 @@ $(document).ready(function(){
 		playerTwo_totalValue += valueAsInt;
 		totalValueAsString = playerTwo_totalValue.toString();
         	dealCard("playerTwo", card);
-        	$("#playerTwoValue").text("Player two value: "+totalValueAsString);
+        	$("#playerTwoValue").text(totalValueAsString);
 	}
   });
 
@@ -271,39 +271,39 @@ function playerStartCards (){
 		playerOne_totalValue += valueAsInt;
 		totalValueAsString = playerOne_totalValue.toString();
 		$(".playerOne").append("<img class='card' src='cards/resized/" + card + ".png'></img>");
-		$("#playerOneValue").text("Player one value: "+totalValueAsString);
+		$("#playerOneValue").text(totalValueAsString);
 		card = cards[number2];
 		valueAsInt = parseInt(values[number2]);
 		playerOne_totalValue += valueAsInt;
 		totalValueAsString = playerOne_totalValue.toString();
 		dealCard("playerOne", card);
-		$("#playerOneValue").text("Player one value: "+totalValueAsString);
+		$("#playerOneValue").text(+totalValueAsString);
 	} else if (player_count == 2){
 		card = cards[number1];
 		valueAsInt = parseInt(values[number1]);
 		playerOne_totalValue += valueAsInt;
 		totalValueAsString = playerOne_totalValue.toString();
 		$(".playerOne").append("<img class='card' src='cards/resized/" + card + ".png'></img>");
-		$("#playerOneValue").text("Player one value: "+totalValueAsString);
+		$("#playerOneValue").text(totalValueAsString);
 		card = cards[number2];
 		valueAsInt = parseInt(values[number2]);
 		playerOne_totalValue += valueAsInt;
 		totalValueAsString = playerOne_totalValue.toString();
 		dealCard("playerOne", card);
-		$("#playerOneValue").text("Player one value: "+totalValueAsString);
+		$("#playerOneValue").text(totalValueAsString);
 
 		card = cards[number3];
 		valueAsInt = parseInt(values[number3]);
 		playerTwo_totalValue += valueAsInt;
 		totalValueAsString = playerTwo_totalValue.toString();
 		$(".playerTwo").append("<img class='card' src='cards/resized/" + card + ".png'></img>");
-		$("#playerTwoValue").text("Player two value: "+totalValueAsString);
+		$("#playerTwoValue").text(totalValueAsString);
 		card = cards[number4];
 		valueAsInt = parseInt(values[number4]);
 		playerTwo_totalValue += valueAsInt;
 		totalValueAsString = playerTwo_totalValue.toString();
 		dealCard("playerTwo", card);
-		$("#playerTwoValue").text("Player two value: "+totalValueAsString);
+		$("#playerTwoValue").text(totalValueAsString);
 	}
 }
 

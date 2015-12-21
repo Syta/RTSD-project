@@ -10,9 +10,32 @@
 
 .playersArea {
     position: relative;
-    height: 40%;
+    height: 30%;
     bottom:0;
     clear: both;
+}
+
+.playerScoreArea {
+    height: 10%;
+
+}
+.scoreArea {
+    margin: 3px;
+    border: 1px solid #555;
+    text-align: center;
+    font-weight: 600;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f5f7f9+0,d0d6db+49,e5ebee+50,f6f8f9+100 */
+
+    background: #f5f7f9; /* Old browsers */
+    background: -moz-linear-gradient(left,  #f5f7f9 0%, #d0d6db 49%, #e5ebee 50%, #f6f8f9 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left,  #f5f7f9 0%,#d0d6db 49%,#e5ebee 50%,#f6f8f9 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right,  #f5f7f9 0%,#d0d6db 49%,#e5ebee 50%,#f6f8f9 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5f7f9', endColorstr='#f6f8f9',GradientType=1 ); /* IE6-9 */
+    
+}
+.scoreArea, .scoreArea p {
+    color: #222;
+
 }
 
 .player {
@@ -72,7 +95,7 @@ body{
 }
 
 .playerStatusArea {
-	float:left;
+    float:left;
 }
 
 .playerControlArea {
