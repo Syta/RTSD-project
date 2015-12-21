@@ -71,6 +71,10 @@ body{
 
 }
 
+.playerStatusArea {
+	float:left;
+}
+
 .playerControlArea {
     padding: 20px;
     min-height: 25%;

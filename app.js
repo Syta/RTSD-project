@@ -60,6 +60,7 @@ io.on('connection', function(socket){
     clients.push(socket.id);
     io.to(clients[user]).emit('getID', socket.id);
     user++;
+    io.sockets.emit('user_conn', user);
 
     socket.on('start', function(){
         cardDeck = initializeDeck(deckCount);
@@ -67,13 +68,22 @@ io.on('connection', function(socket){
         num1 = cardDeck.pop();
         num2 = 0 + cardDeck.pop();
         num3 = 0 + cardDeck.pop();
-        io.sockets.emit('startAll', {one: num1, two: num2, three: num3});
+	num4 = 0 + cardDeck.pop();
+        num5 = 0 + cardDeck.pop();
+        num6 = 0 + cardDeck.pop();
+        num7 = 0 + cardDeck.pop();
+        num8 = 0 + cardDeck.pop();
+        num9 = 0 + cardDeck.pop();
+        num10 = 0 + cardDeck.pop();
+        io.sockets.emit('startAll', {one: num1, two: num2, three: num3, four: num4,
+            five: num5, six: num6, seven: num7, eight: num8, nine: num9, ten: num10});
     });
 
     socket.on('disconnect', function(){
         console.log('user has disconnected');
 	clients.pop(user);
 	user--;
+        io.sockets.emit('user_disconn', user);
     });
     socket.on('hit', function(){
         num1 = 0 + cardDeck.pop();

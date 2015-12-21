@@ -42,7 +42,8 @@ var values = ["2","2","2","2","3","3","3","3","4","4","4","4","5","5","5","5",
 		"10","10","10","10","10","10","10","10"];
 var card;
 var dealer_totalValue = 0;
-var player_totalValue = 0;
+var playerOne_totalValue = 0;
+var playerTwo_totalValue = 0;
 var player_money = 10;
 var bet;
 var valueAsInt;
@@ -50,8 +51,16 @@ var totalValueAsString;
 var number;
 var number1;
 var number2;
+var number3;
+var number4;
+var number5;
+var number6;
 var betting_phase;
 var userID;
+var player_turn = 1;
+var player_turn_id;
+var player_count = 0;
+var game_end = false;
 
 $(document).ready(function(){
   var host = window.location.hostname;
@@ -65,10 +74,20 @@ $(document).ready(function(){
   	userID = data;
 	//$("#userID").text("ID: "+userID);
   });
+  
+  socket.on('user_conn', function (data) {
+  	player_count = data;
+  });
+  
+  socket.on('user_disconn', function (data) {
+  	player_count = data;
+  });
 
   $("#start").click( function() {
 	if(betting_phase == false){	
 		socket.emit('start');
+	} else {
+		alert("Waiting for bets.");
 	}
   });
 
@@ -76,12 +95,19 @@ $(document).ready(function(){
 	number = data.one;
 	number1 = data.two;
 	number2 = data.three;
+	number3 = data.four;
+	number4 = data.five;
+	number5 = data.six;
+	number6 = data.seven;
+	number7 = data.eight;
+	number8 = data.nine;
 	dealer_totalValue = 0;
 	player_totalValue = 0;
 	$("#wrap").replaceWith(divClone.clone(true));
 	dealerStartCards();
 	playerStartCards();
 	$("#playerMoney").text("Money: "+player_money);
+	$("#playerTurn").text("Player turn: "+player_turn);
 
     $(".playerControlArea .playerButtons")
         .removeClass("betting_state")
@@ -113,15 +139,23 @@ $(document).ready(function(){
 	}
   });
   socket.on('hitAll', function (data) {
+	if(player_turn == 1){
 		number = data;
 		card = cards[number];
 		valueAsInt = parseInt(values[number]);
-		player_totalValue += valueAsInt;
-		totalValueAsString = player_totalValue.toString();
-
-        dealCard("playerOne", card);
-		
-        $("#playerValue").text("Player value: "+totalValueAsString);
+		playerOne_totalValue += valueAsInt;
+		totalValueAsString = playerOne_totalValue.toString();
+        	dealCard("playerOne", card);
+        	$("#playerOneValue").text("Player one value: "+totalValueAsString);
+	} else if (player_turn == 2){
+		number = data;
+		card = cards[number];
+		valueAsInt = parseInt(values[number]);
+		playerTwo_totalValue += valueAsInt;
+		totalValueAsString = playerTwo_totalValue.toString();
+        	dealCard("playerTwo", card);
+        	$("#playerTwoValue").text("Player two value: "+totalValueAsString);
+	}
   });
 
   $("#stand").click( function() {
@@ -133,22 +167,20 @@ $(document).ready(function(){
   });
 
   socket.on('standAll', function (data) {
-      betting_phase = true;
-      number = data.one;
-      card = cards[number];
-      valueAsInt = parseInt(values[number]);
-      dealer_totalValue += valueAsInt;
-      totalValueAsString = dealer_totalValue.toString();
-      $(".dealerCardOne").append("<img class='card' src='cards/resized/" + card + ".png'></img>");
-      $("#dealerValue").text("Dealer value: "+totalValueAsString);
-      $("#backCard").hide();
-
-
+	if(player_turn == player_count){
+        betting_phase = true;
+        number = data.one;
+        card = cards[number];
+        valueAsInt = parseInt(values[number]);
+        dealer_totalValue += valueAsInt;
+        totalValueAsString = dealer_totalValue.toString();
+        $(".dealerCardOne").append("<img class='card' src='cards/resized/" + card + ".png'></img>");
+        $("#dealerValue").text("Dealer value: "+totalValueAsString);
+        $("#backCard").hide();
    
     $(".playerControlArea .playerButtons")
         .removeClass("playing_state")
         .addClass("watching_state");
-   
 
       if(dealer_totalValue < 17){
           number = data.two;
@@ -185,10 +217,6 @@ $(document).ready(function(){
                   }
               }
           }
-
-
-
-
       }
 
 	if(dealer_totalValue == 21){
@@ -216,6 +244,10 @@ $(document).ready(function(){
 			player_money += bet * 2.0;
 			$("#playerMoney").text("Money: "+player_money);
 		}
+	} else {
+		player_turn++;
+		$("#playerTurn").text("Player turn: "+player_turn);
+	}
   });
 
   var divClone = $("#wrap").clone(true);
@@ -233,19 +265,45 @@ function dealerStartCards (){
 }
 
 function playerStartCards (){
-	card = cards[number1];
-	valueAsInt = parseInt(values[number1]);
-	player_totalValue += valueAsInt;
-	totalValueAsString = player_totalValue.toString();
-	$(".playerOne").append("<img class='card' src='cards/resized/" + card + ".png'></img>");
-	$("#playerValue").text("Player value: "+totalValueAsString);
-	card = cards[number2];
-	valueAsInt = parseInt(values[number2]);
-	player_totalValue += valueAsInt;
-	totalValueAsString = player_totalValue.toString();
+	if(player_count == 1){
+		card = cards[number1];
+		valueAsInt = parseInt(values[number1]);
+		playerOne_totalValue += valueAsInt;
+		totalValueAsString = playerOne_totalValue.toString();
+		$(".playerOne").append("<img class='card' src='cards/resized/" + card + ".png'></img>");
+		$("#playerOneValue").text("Player one value: "+totalValueAsString);
+		card = cards[number2];
+		valueAsInt = parseInt(values[number2]);
+		playerOne_totalValue += valueAsInt;
+		totalValueAsString = playerOne_totalValue.toString();
+		dealCard("playerOne", card);
+		$("#playerOneValue").text("Player one value: "+totalValueAsString);
+	} else if (player_count == 2){
+		card = cards[number1];
+		valueAsInt = parseInt(values[number1]);
+		playerOne_totalValue += valueAsInt;
+		totalValueAsString = playerOne_totalValue.toString();
+		$(".playerOne").append("<img class='card' src='cards/resized/" + card + ".png'></img>");
+		$("#playerOneValue").text("Player one value: "+totalValueAsString);
+		card = cards[number2];
+		valueAsInt = parseInt(values[number2]);
+		playerOne_totalValue += valueAsInt;
+		totalValueAsString = playerOne_totalValue.toString();
+		dealCard("playerOne", card);
+		$("#playerOneValue").text("Player one value: "+totalValueAsString);
 
-    dealCard("playerOne", card);
-    
-	$("#playerValue").text("Player value: "+totalValueAsString);
+		card = cards[number3];
+		valueAsInt = parseInt(values[number3]);
+		playerTwo_totalValue += valueAsInt;
+		totalValueAsString = playerTwo_totalValue.toString();
+		$(".playerTwo").append("<img class='card' src='cards/resized/" + card + ".png'></img>");
+		$("#playerTwoValue").text("Player two value: "+totalValueAsString);
+		card = cards[number4];
+		valueAsInt = parseInt(values[number4]);
+		playerTwo_totalValue += valueAsInt;
+		totalValueAsString = playerTwo_totalValue.toString();
+		dealCard("playerTwo", card);
+		$("#playerTwoValue").text("Player two value: "+totalValueAsString);
+	}
 }
 
