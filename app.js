@@ -51,6 +51,7 @@ var num7;
 var num8;
 var num9;
 var num10;
+var num11;
 var clients = [];
 var user = 0;
 var bets_placed = 0;
@@ -71,17 +72,18 @@ io.on('connection', function(socket){
         num1 = cardDeck.pop();
         num2 = 0 + cardDeck.pop();
         num3 = 0 + cardDeck.pop();
-	num4 = 0 + cardDeck.pop();
+		num4 = 0 + cardDeck.pop();
         num5 = 0 + cardDeck.pop();
         num6 = 0 + cardDeck.pop();
         num7 = 0 + cardDeck.pop();
         num8 = 0 + cardDeck.pop();
         num9 = 0 + cardDeck.pop();
         num10 = 0 + cardDeck.pop();
-	bets_placed = 0;
-	player_turn = 0;
+        num11 = 0 + cardDeck.pop();
+		bets_placed = 0;
+		player_turn = 0;
         io.sockets.emit('startAll', {one: num1, two: num2, three: num3, four: num4,
-            five: num5, six: num6, seven: num7, eight: num8, nine: num9, ten: num10});
+            five: num5, six: num6, seven: num7, eight: num8, nine: num9, ten: num10, eleven: num11});
     });
 
     socket.on('player_turn', function(){

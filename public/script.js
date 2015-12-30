@@ -44,6 +44,9 @@ var card;
 var dealer_totalValue = 0;
 var playerOne_totalValue = 0;
 var playerTwo_totalValue = 0;
+var playerThree_totalValue = 0;
+var playerFour_totalValue = 0;
+var playerFive_totalValue = 0;
 var player_money = 10;
 var bet;
 var valueAsInt;
@@ -55,6 +58,10 @@ var number3;
 var number4;
 var number5;
 var number6;
+var number7;
+var number8;
+var number9;
+var number10;
 var betting_phase;
 var can_bet = true;
 var userID;
@@ -103,7 +110,8 @@ $(document).ready(function(){
 	number6 = data.seven;
 	number7 = data.eight;
 	number8 = data.nine;
-	//player_turn_id = data.turn;
+	number9 = data.ten;
+	number10 = data.eleven;
 	dealer_totalValue = 0;
 	playerOne_totalValue = 0;
 	playerTwo_totalValue = 0;
@@ -154,16 +162,40 @@ $(document).ready(function(){
 		valueAsInt = parseInt(values[number]);
 		playerOne_totalValue += valueAsInt;
 		totalValueAsString = playerOne_totalValue.toString();
-        	dealCard("playerOne", card);
-        	$("#playerOneValue").text(totalValueAsString);
+        dealCard("playerOne", card);
+        $("#playerOneValue").text(totalValueAsString);
 	} else if (player_turn == 2){
 		number = data;
 		card = cards[number];
 		valueAsInt = parseInt(values[number]);
 		playerTwo_totalValue += valueAsInt;
 		totalValueAsString = playerTwo_totalValue.toString();
-        	dealCard("playerTwo", card);
-        	$("#playerTwoValue").text(totalValueAsString);
+        dealCard("playerTwo", card);
+        $("#playerTwoValue").text(totalValueAsString);
+	} else if (player_turn == 3){
+		number = data;
+		card = cards[number];
+		valueAsInt = parseInt(values[number]);
+		playerThree_totalValue += valueAsInt;
+		totalValueAsString = playerThree_totalValue.toString();
+        dealCard("playerThree", card);
+        $("#playerThreeValue").text(totalValueAsString);
+	} else if (player_turn == 4){
+		number = data;
+		card = cards[number];
+		valueAsInt = parseInt(values[number]);
+		playerFour_totalValue += valueAsInt;
+		totalValueAsString = playerFour_totalValue.toString();
+        dealCard("playerFour", card);
+        $("#playerFourValue").text(totalValueAsString);
+	} else if (player_turn == 5){
+		number = data;
+		card = cards[number];
+		valueAsInt = parseInt(values[number]);
+		playerFive_totalValue += valueAsInt;
+		totalValueAsString = playerFive_totalValue.toString();
+        dealCard("playerFive", card);
+        $("#playerFiveValue").text(totalValueAsString);
 	}
   });
 
@@ -276,7 +308,7 @@ function dealerStartCards (){
 }
 
 function playerStartCards (){
-	if(player_count == 1){
+	if(player_count > 0){
 		card = cards[number1];
 		valueAsInt = parseInt(values[number1]);
 		playerOne_totalValue += valueAsInt;
@@ -289,20 +321,9 @@ function playerStartCards (){
 		totalValueAsString = playerOne_totalValue.toString();
 		dealCard("playerOne", card);
 		$("#playerOneValue").text(+totalValueAsString);
-	} else if (player_count == 2){
-		card = cards[number1];
-		valueAsInt = parseInt(values[number1]);
-		playerOne_totalValue += valueAsInt;
-		totalValueAsString = playerOne_totalValue.toString();
-		$(".playerOne").append("<img class='card' src='cards/resized/" + card + ".png'></img>");
-		$("#playerOneValue").text(totalValueAsString);
-		card = cards[number2];
-		valueAsInt = parseInt(values[number2]);
-		playerOne_totalValue += valueAsInt;
-		totalValueAsString = playerOne_totalValue.toString();
-		dealCard("playerOne", card);
-		$("#playerOneValue").text(totalValueAsString);
-
+	}
+	
+	if (player_count > 1){
 		card = cards[number3];
 		valueAsInt = parseInt(values[number3]);
 		playerTwo_totalValue += valueAsInt;
@@ -315,6 +336,51 @@ function playerStartCards (){
 		totalValueAsString = playerTwo_totalValue.toString();
 		dealCard("playerTwo", card);
 		$("#playerTwoValue").text(totalValueAsString);
+	}
+	
+	if (player_count > 2){
+		card = cards[number5];
+		valueAsInt = parseInt(values[number5]);
+		playerThree_totalValue += valueAsInt;
+		totalValueAsString = playerThree_totalValue.toString();
+		$(".playerThree").append("<img class='card' src='cards/resized/" + card + ".png'></img>");
+		$("#playerThreeValue").text(totalValueAsString);
+		card = cards[number6];
+		valueAsInt = parseInt(values[number6]);
+		playerThree_totalValue += valueAsInt;
+		totalValueAsString = playerThree_totalValue.toString();
+		dealCard("playerThree", card);
+		$("#playerThreeValue").text(totalValueAsString);
+	}
+	
+	if (player_count > 3){
+		card = cards[number7];
+		valueAsInt = parseInt(values[number7]);
+		playerFour_totalValue += valueAsInt;
+		totalValueAsString = playerFour_totalValue.toString();
+		$(".playerFour").append("<img class='card' src='cards/resized/" + card + ".png'></img>");
+		$("#playerFourValue").text(totalValueAsString);
+		card = cards[number8];
+		valueAsInt = parseInt(values[number8]);
+		playerFour_totalValue += valueAsInt;
+		totalValueAsString = playerFour_totalValue.toString();
+		dealCard("playerFour", card);
+		$("#playerFourValue").text(totalValueAsString);
+	}
+	
+	if (player_count > 4){
+		card = cards[number9];
+		valueAsInt = parseInt(values[number9]);
+		playerFive_totalValue += valueAsInt;
+		totalValueAsString = playerFive_totalValue.toString();
+		$(".playerFive").append("<img class='card' src='cards/resized/" + card + ".png'></img>");
+		$("#playerFiveValue").text(totalValueAsString);
+		card = cards[number10];
+		valueAsInt = parseInt(values[number10]);
+		playerFive_totalValue += valueAsInt;
+		totalValueAsString = playerFive_totalValue.toString();
+		dealCard("playerFive", card);
+		$("#playerFiveValue").text(totalValueAsString);
 	}
 }
 
