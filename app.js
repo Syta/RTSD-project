@@ -101,6 +101,7 @@ io.on('connection', function(socket){
 	if(user <= 0){
 		bets_placed = 0;
 		player_turn = 0;
+		clients.length = 0;
 	}
         io.sockets.emit('user_disconn', user);
     });

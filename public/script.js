@@ -115,13 +115,16 @@ $(document).ready(function(){
 	dealer_totalValue = 0;
 	playerOne_totalValue = 0;
 	playerTwo_totalValue = 0;
+	playerThree_totalValue = 0;
+	playerFour_totalValue = 0;
+	playerFive_totalValue = 0;
 	player_turn = 1;
 	$("#wrap").replaceWith(divClone.clone(true));
 	dealerStartCards();
 	playerStartCards();
 	$("#playerMoney").text("Money: "+player_money);
 	$("#playerTurn").text("Player turn: "+player_turn);
-
+	$("#currentBet").text("Bet: "+bet);
 	$(".playerControlArea .playerButtons")
 	.removeClass("betting_state")
         .addClass("playing_state");
@@ -152,7 +155,7 @@ $(document).ready(function(){
 	if(betting_phase == false && player_turn_id == userID){
 		socket.emit('hit');
 	} else {
-		alert("Waiting for bets.");	
+		alert("Not your turn.");	
 	}
   });
   socket.on('hitAll', function (data) {
@@ -204,13 +207,13 @@ $(document).ready(function(){
 		socket.emit('stand');
 		socket.emit("player_turn");
 	} else {
-		alert("Waiting for bets.");
+		alert("Not your turn.");
 	}	
   });
 
   socket.on('standAll', function (data) {
 	if(player_turn == player_count){
-	can_bet = true;
+		can_bet = true;
         betting_phase = true;
         number = data.one;
         card = cards[number];
@@ -225,68 +228,59 @@ $(document).ready(function(){
         .removeClass("playing_state")
         .addClass("watching_state");
 
-      if(dealer_totalValue < 17){
-          number = data.two;
-          card = cards[number];
-          valueAsInt = parseInt(values[number]);
-          dealer_totalValue += valueAsInt;
-          totalValueAsString = dealer_totalValue.toString();
-          $(".dealerCardOne").append("<img class='card' src='cards/resized/" + card + ".png'></img>");
-          $("#dealerValue").text(totalValueAsString);
-          if(dealer_totalValue < 17){
-              number = data.three;
-              card = cards[number];
-              valueAsInt = parseInt(values[number]);
-              dealer_totalValue += valueAsInt;
-              totalValueAsString = dealer_totalValue.toString();
-              $(".dealerCardOne").append("<img class='card' src='cards/resized/" + card + ".png'></img>");
-              $("#dealerValue").text(totalValueAsString);
-              if(dealer_totalValue < 17){
-                  number = data.four;
-                  card = cards[number];
-                  valueAsInt = parseInt(values[number]);
-                  dealer_totalValue += valueAsInt;
-                  totalValueAsString = dealer_totalValue.toString();
-                  $(".dealerCardOne").append("<img class='card' src='cards/resized/" + card + ".png'></img>");
-                  $("#dealerValue").text(totalValueAsString);
-                  if(dealer_totalValue < 17){
-                      number = data.five;
-                      card = cards[number];
-                      valueAsInt = parseInt(values[number]);
-                      dealer_totalValue += valueAsInt;
-                      totalValueAsString = dealer_totalValue.toString();
-                      $(".dealerCardOne").append("<img class='card' src='cards/resized/" + card + ".png'></img>");
-                      $("#dealerValue").text(totalValueAsString);
-                  }
-              }
-          }
-      }
-
-	if(dealer_totalValue == 21){
-			$("#winner").append("<p>Dealer wins</p>");
-			$("#currentBet").text("Bet: ");
-		} else if(player_totalValue == 21) {
-			$("#winner").append("<p>Player wins</p>");
-			$("#currentBet").text("Bet: ");
-			player_money += bet * 2.5;
-			$("#playerMoney").text("Money: "+player_money);
-		} else if (player_totalValue > 21){
-			$("#winner").append("<p>Dealer wins</p>");
-			$("#currentBet").text("Bet: ");
-		} else if (dealer_totalValue > 21) {
-			$("#winner").append("<p>Player wins</p>");
-			$("#currentBet").text("Bet: ");
-			player_money += bet * 2.0;
-			$("#playerMoney").text("Money: "+player_money);
-		} else if (dealer_totalValue > player_totalValue){
-			$("#winner").append("<p>Dealer wins</p>");
-			$("#currentBet").text("Bet: ");
-		} else {
-			$("#winner").append("<p>Player wins</p>");
-			$("#currentBet").text("Bet: ");
-			player_money += bet * 2.0;
-			$("#playerMoney").text("Money: "+player_money);
+		if(dealer_totalValue < 17){
+			number = data.two;
+			card = cards[number];
+			valueAsInt = parseInt(values[number]);
+			dealer_totalValue += valueAsInt;
+			totalValueAsString = dealer_totalValue.toString();
+			$(".dealerCardOne").append("<img class='card' src='cards/resized/" + card + ".png'></img>");
+			$("#dealerValue").text(totalValueAsString);
+			if(dealer_totalValue < 17){
+				number = data.three;
+				card = cards[number];
+				valueAsInt = parseInt(values[number]);
+				dealer_totalValue += valueAsInt;
+				totalValueAsString = dealer_totalValue.toString();
+				$(".dealerCardOne").append("<img class='card' src='cards/resized/" + card + ".png'></img>");
+				$("#dealerValue").text(totalValueAsString);
+				if(dealer_totalValue < 17){
+					number = data.four;
+					card = cards[number];
+					valueAsInt = parseInt(values[number]);
+					dealer_totalValue += valueAsInt;
+					totalValueAsString = dealer_totalValue.toString();
+					$(".dealerCardOne").append("<img class='card' src='cards/resized/" + card + ".png'></img>");
+					$("#dealerValue").text(totalValueAsString);
+					if(dealer_totalValue < 17){
+						number = data.five;
+						card = cards[number];
+						valueAsInt = parseInt(values[number]);
+						dealer_totalValue += valueAsInt;
+						totalValueAsString = dealer_totalValue.toString();
+						$(".dealerCardOne").append("<img class='card' src='cards/resized/" + card + ".png'></img>");
+						$("#dealerValue").text(totalValueAsString);
+					}
+				}
+			}
 		}
+      
+		if(player_count > 0){
+			winCheck(1);
+		}
+		if(player_count > 1){
+			winCheck(2);
+		}
+		if(player_count > 2){
+			winCheck(3);
+		}
+		if(player_count > 3){
+			winCheck(4);
+		}
+		if(player_count > 4){
+			winCheck(5);
+		}
+	
 	} else {
 		player_turn++;
 		$("#playerTurn").text("Player turn: "+player_turn);
@@ -296,6 +290,48 @@ $(document).ready(function(){
   var divClone = $("#wrap").clone(true);
 
 });
+
+function winCheck (player){
+	var player_totalValue = 0;
+	
+	if(player == 1){
+		player_totalValue = playerOne_totalValue;
+	} else if (player == 2){
+		player_totalValue = playerTwo_totalValue;
+	} else if (player == 3){
+		player_totalValue = playerThree_totalValue;
+	} else if (player == 4){
+		player_totalValue = playerFour_totalValue;
+	} else if (player == 5){
+		player_totalValue = playerFive_totalValue;
+	}
+	
+	if(dealer_totalValue == 21){
+		$("#winner").append("<p>Dealer wins</p>");
+		$("#currentBet").text("Bet: ");
+	} else if(player_totalValue == 21) {
+		$("#winner").append("<p>Player wins</p>");
+		$("#currentBet").text("Bet: ");
+		player_money += bet * 2.5;
+		$("#playerMoney").text("Money: "+player_money);
+	} else if (player_totalValue > 21){
+		$("#winner").append("<p>Dealer wins</p>");
+		$("#currentBet").text("Bet: ");
+	} else if (dealer_totalValue > 21) {
+		$("#winner").append("<p>Player wins</p>");
+		$("#currentBet").text("Bet: ");
+		player_money += bet * 2.0;
+		$("#playerMoney").text("Money: "+player_money);
+	} else if (dealer_totalValue > player_totalValue){
+		$("#winner").append("<p>Dealer wins</p>");
+		$("#currentBet").text("Bet: ");
+	} else {
+		$("#winner").append("<p>Player wins</p>");
+		$("#currentBet").text("Bet: ");
+		player_money += bet * 2.0;
+		$("#playerMoney").text("Money: "+player_money);
+	}
+}
 
 function dealerStartCards (){
 	card = cards[number];
