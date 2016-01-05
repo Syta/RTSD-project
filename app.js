@@ -87,11 +87,11 @@ io.on('connection', function(socket){
     });
 
     socket.on('player_turn', function(){
-	if(player_turn <= clients.length){
-		player_turn_id = clients[player_turn];
-		io.sockets.emit('player_turnAll', player_turn_id);
-		player_turn++;
-	}
+		if(player_turn <= clients.length){
+			player_turn_id = clients[player_turn];
+			io.sockets.emit('player_turnAll', player_turn_id);
+			player_turn++;
+		}
     });
 
     socket.on('disconnect', function(){
@@ -105,16 +105,19 @@ io.on('connection', function(socket){
 	}
         io.sockets.emit('user_disconn', user);
     });
+    
     socket.on('hit', function(){
         num1 = 0 + cardDeck.pop();
         io.sockets.emit('hitAll', num1);
     });
+    
     socket.on('bet', function(){
-	bets_placed++;	
-	if(bets_placed == user){        
-		io.sockets.emit('betAll');
-	}
+		bets_placed++;	
+		if(bets_placed == user){        
+			io.sockets.emit('betAll');
+		}
     });
+    
     socket.on('stand', function(){
         num1 = 0 + cardDeck.pop();
         num2 = 0 + cardDeck.pop();
@@ -126,9 +129,15 @@ io.on('connection', function(socket){
         num8 = 0 + cardDeck.pop();
         num9 = 0 + cardDeck.pop();
         num10 = 0 + cardDeck.pop();
-	bets_placed = 0;
+		bets_placed = 0;
         io.sockets.emit('standAll', {one: num1, two: num2, three: num3, four: num4,
             five: num5, six: num6, seven: num7, eight: num8, nine: num9, ten: num10});
+    });
+    
+    socket.on('end', function(){
+        for(var i=0;i<clients.length;i++){
+			io.to(clients[i]).emit('payment', i);
+		}
     });
 
 });

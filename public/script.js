@@ -206,6 +206,9 @@ $(document).ready(function(){
 	if(betting_phase == false && player_turn_id == userID){
 		socket.emit('stand');
 		socket.emit("player_turn");
+		if(player_turn == player_count){
+			socket.emit("end");
+		}
 	} else {
 		alert("Not your turn.");
 	}	
@@ -223,6 +226,7 @@ $(document).ready(function(){
         $(".dealerCardOne").append("<img class='card' src='cards/resized/" + card + ".png'></img>");
         $("#dealerValue").text(totalValueAsString);
         $("#backCard").hide();
+        
    
         $(".playerControlArea .playerButtons")
         .removeClass("playing_state")
@@ -265,26 +269,17 @@ $(document).ready(function(){
 			}
 		}
       
-		if(player_count > 0){
-			winCheck(1);
-		}
-		if(player_count > 1){
-			winCheck(2);
-		}
-		if(player_count > 2){
-			winCheck(3);
-		}
-		if(player_count > 3){
-			winCheck(4);
-		}
-		if(player_count > 4){
-			winCheck(5);
-		}
+		
 	
 	} else {
 		player_turn++;
 		$("#playerTurn").text("Player turn: "+player_turn);
 	}
+  });
+  
+  socket.on('payment', function (data) {
+		var player = data;
+		winCheck(player);
   });
 
   var divClone = $("#wrap").clone(true);
